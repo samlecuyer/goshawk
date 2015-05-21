@@ -54,7 +54,7 @@ func (mb *MongoBlog) OpenFile(name string, flag int, perm os.FileMode) (afero.Fi
 func (mb *MongoBlog) openReadFile(name string, flag int, perm os.FileMode) (afero.File, error) {
 	posts := mb.session.DB("blog").C("posts")
 	switch name {
-	case "/posts/":
+	case "/posts":
 		{
 			return NewQueryFile(name, flag, os.ModeDir|0755, posts), nil
 		}

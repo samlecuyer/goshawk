@@ -3,6 +3,7 @@ package fs
 import (
 	"bytes"
 	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 	"os"
 	"time"
 )
@@ -49,6 +50,24 @@ func (r *QueryFile) Readdir(count int) ([]os.FileInfo, error) {
 	return nil, os.ErrInvalid
 }
 func (r *QueryFile) Readdirnames(n int) ([]string, error) {
+	if r.mode.IsDir() {
+		query := r.q.Find(nil).Select(bson.M{"slug": 1})
+		if n > -1 {
+			query.Limit(n)
+		}
+		var result []struct {
+			Slug string `json:"slug"`
+		}
+		err := query.All(&result)
+		if err != nil {
+			return nil, err
+		}
+		names := make([]string, len(result))
+		for i, name := range result {
+			names[i] = name.Slug
+		}
+		return names, nil
+	}
 	return nil, os.ErrInvalid
 }
 func (r *QueryFile) WriteString(s string) (ret int, err error) {
