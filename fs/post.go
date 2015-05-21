@@ -7,15 +7,16 @@ import (
 
 type Post struct {
 	// this is the "filename"
-	Slug      string `json:"slug"`
-	Title     string `json:"title"`
-	Body      string `json:"body"`
-	Raw       string `json:"raw"`
-	Published bool   `json:"published"`
+	Slug  string                 `json:"slug"`
+	Title string                 `json:"title"`
+	Body  string                 `json:"body"`
+	Raw   string                 `json:"raw"`
+	Meta  map[string]interface{} `json:"meta"`
 }
 
 func FromMap(name string, m map[string]interface{}) *Post {
 	p := new(Post)
+	p.Meta = m
 	title, ok := m["title"].(string)
 	if ok {
 		p.Title = title

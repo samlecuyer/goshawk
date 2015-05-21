@@ -51,7 +51,6 @@ func (r *WriteFile) Close() error {
 	post := FromMap(r.name, metamap)
 	post.Raw = string(raw)
 	post.Body = string(page.Content())
-	fmt.Printf("closing: %v\n\n", post)
 	_, err = r.q.Upsert(bson.M{"slug": post.Slug}, post)
 	return err
 }
