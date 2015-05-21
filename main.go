@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/samlecuyer/goshawk/scp"
 	"golang.org/x/crypto/ssh"
-    "github.com/samlecuyer/goshawk/scp"
 	"io/ioutil"
 	"net"
 )

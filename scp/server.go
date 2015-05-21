@@ -3,8 +3,8 @@ package scp
 import (
 	"flag"
 	"fmt"
+	"github.com/samlecuyer/goshawk/fs"
 	"github.com/spf13/afero"
-    "github.com/samlecuyer/goshawk/fs"
 	"golang.org/x/crypto/ssh"
 	"net"
 	"strings"
@@ -94,11 +94,11 @@ func (ss *ScpServer) acceptScp(newChannel ssh.NewChannel) {
 }
 
 type flags struct {
-	f    bool
-	t    bool
-	r    bool
-	d    bool
-	v    bool
+	f     bool
+	t     bool
+	r     bool
+	d     bool
+	v     bool
 	targs []string
 }
 
